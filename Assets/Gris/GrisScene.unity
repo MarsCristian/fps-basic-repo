@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2161.8684, g: 2265.801, b: 3288.9224, a: 1}
+  m_IndirectSpecularColor: {r: 2161.384, g: 2265.389, b: 3288.5474, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1805,6 +1805,7 @@ GameObject:
   - component: {fileID: 1156901288}
   - component: {fileID: 1156901287}
   - component: {fileID: 1156901289}
+  - component: {fileID: 1156901290}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1852,7 +1853,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1652708015}
-  - {fileID: 1594026067}
   - {fileID: 1823688467}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1879,7 +1879,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156901284}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3acdf7e8827bfe648b1e560eba7af258, type: 3}
   m_Name: 
@@ -1900,6 +1900,20 @@ MonoBehaviour:
   cam: {fileID: 1823688466}
   xSensitivity: 10
   ySensitivity: 10
+--- !u!114 &1156901290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156901284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e38e6ade95d4274984677d4abdc0a87, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sway: {fileID: 1594026071}
+  bobbing: {fileID: 1594026072}
 --- !u!1 &1175473260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2653,6 +2667,8 @@ GameObject:
   - component: {fileID: 1594026069}
   - component: {fileID: 1594026068}
   - component: {fileID: 1594026070}
+  - component: {fileID: 1594026071}
+  - component: {fileID: 1594026072}
   m_Layer: 0
   m_Name: HandsPivot
   m_TagString: Untagged
@@ -2668,13 +2684,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594026066}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 949670635}
-  m_Father: {fileID: 1156901286}
+  m_Father: {fileID: 1823688467}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1594026068
 MonoBehaviour:
@@ -2683,7 +2699,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594026066}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7441ebd673eb755408c83c31635cd741, type: 3}
   m_Name: 
@@ -2699,7 +2715,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594026066}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0b5afa7e7cd4a3848a1eac1001b663d9, type: 3}
   m_Name: 
@@ -2713,12 +2729,53 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1594026066}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7986d852b507e6348a7aed35f4f0517e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1823688467}
+--- !u!114 &1594026071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594026066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 645e8ef8a900bbf4e857c0477fe18a28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sway: 1
+  swayRotation: 1
+  step: 0.01
+  maxStepDistance: 0.06
+  swayPos: {x: 0, y: 0, z: 0}
+  rotationStep: 3
+  maxRotationStep: 4
+  swayEulerRotation: {x: 0, y: 0, z: 0}
+  smooth: 10
+  smoothRotation: 12
+--- !u!114 &1594026072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1594026066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9497769df63424c89cc7874d319d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bobSway: 1
+  bobOfsset: 1
+  speedCurve: 0
+  travelLimit: {x: 0.025, y: 0.025, z: 0.025}
+  bobLimit: {x: 0.01, y: 0.01, z: 0.01}
+  rotationMultiplier: {x: 2, y: 2, z: 2}
+  sway: {fileID: 1594026071}
 --- !u!1 &1610119615
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3321,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.70000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1594026067}
   m_Father: {fileID: 1156901286}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1823688468

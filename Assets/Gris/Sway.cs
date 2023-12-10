@@ -9,15 +9,15 @@ public class Sway : MonoBehaviour
     public bool swayRotation = true;
     public float step = 0.01f;//multiplicado pelo valor do mouse por 1 freame
     public float maxStepDistance = 0.06f;//distancia maxima da origem
-    Vector3 swayPos;
+    public Vector3 swayPos;
 
     //rotation
     public float rotationStep = 4f;//same
     public float maxRotationStep = 5f;//rotacao maxima
-    Vector3 swayEulerRotation;
+    public Vector3 swayEulerRotation;
 
-    float smooth = 10f;
-    float smoothRotation = 12f;
+    public float smooth = 10f;
+    public float smoothRotation = 12f;
 
 
 
@@ -51,19 +51,5 @@ public class Sway : MonoBehaviour
 
     }
 
-    public void CompositePositionRotation()
-    {
-        //position
-        transform.localPosition = Vector3.Lerp(
-            transform.localPosition,
-            swayPos,
-            Time.deltaTime * smooth
-        );
-        //rotation
-        transform.localRotation = Quaternion.Slerp(
-            transform.localRotation,
-            Quaternion.Euler(swayEulerRotation),
-            Time.deltaTime * smoothRotation
-        );
-    }
+    
 }

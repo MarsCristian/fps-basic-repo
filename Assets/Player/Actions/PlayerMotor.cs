@@ -109,4 +109,14 @@ public class PlayerMotor : MonoBehaviour
         }
     }
 
+    public bool getIsGrounded()
+    {
+        return isGrouded;
+    }
+
+    public float getActualSpeed()
+    {
+        return actualSpeed;
+    }
+
 }
