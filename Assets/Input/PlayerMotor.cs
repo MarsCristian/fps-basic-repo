@@ -90,7 +90,11 @@ public class PlayerMotor : MonoBehaviour
 
     public void Sprint()
     {
-
+        isSprinting = !isSprinting;
+        if(isSprinting)
+            speed = 8;
+        else
+            speed = 5;
     }
 
 }
