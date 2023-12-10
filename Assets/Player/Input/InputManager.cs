@@ -20,6 +20,8 @@ public class InputManager : MonoBehaviour
     //look mouse
     private PlayerLook look;
 
+    public ViewBobbing viewBobbing;
+
 
     void Awake() 
     {
@@ -30,6 +32,7 @@ public class InputManager : MonoBehaviour
         //pegar os componentes do jogador
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+        //viewBobbing = GetComponent<ViewBobbing>();
 
         //isso mapeia o contexto do input pra funcao q a gente quer chamar
         //performed, canceled, started
@@ -47,12 +50,15 @@ public class InputManager : MonoBehaviour
     {
         // chamar o motor do moviemnto do player com o input do input system
         motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
+        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        viewBobbing.ProcessViewBobbing(onFoot.Movement.ReadValue<Vector2>());
+
     }
 
     //update dps
     private void LateUpdate() 
     {
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
+        //look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
     }
 
     private void OnEnable() 
