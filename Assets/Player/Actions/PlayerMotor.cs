@@ -10,12 +10,11 @@ public class PlayerMotor : MonoBehaviour
     private Vector3 playerVelocity;//referencia a posicao do movimento do player
     //---------------------PLAYER-STATUS---------------------//
     public float speed = 5f;//velocidade padrao do player
-    public float jumpHeight = 3f;
+    public float jumpHeight = 1.5f;
     public float sprintSpeed = 10f;
     //---------------------PLAYER-STATES---------------------//
     private bool isGrouded;//ver se ta no chao
     private bool isCrouching;
-    [SerializeField]
     private bool isSprinting;
     //---------------------CONFIG---------------------//
     public float gravity = 9.8f;
@@ -23,7 +22,6 @@ public class PlayerMotor : MonoBehaviour
     private bool lerpCrouch;
     private float crouchTimer;
     //---------------------SPRINT---------------------//
-    [SerializeField]
     private float actualSpeed;
 
 
@@ -43,20 +41,7 @@ public class PlayerMotor : MonoBehaviour
 
         //resolver o agaixar
         if(lerpCrouch)
-        {
-            crouchTimer += Time.deltaTime;
-            float p = crouchTimer/1;
-            if (isCrouching)
-                controller.height = Mathf.Lerp(controller.height,1,p);
-            else
-                controller.height = Mathf.Lerp(controller.height,2,p);
-
-            if (p>1)
-            {
-                lerpCrouch = false;
-                crouchTimer = 0f;
-            }
-        }
+            CrouchAceleration();
     }
 
     public void ProcessMove(Vector2 input)
@@ -106,6 +91,22 @@ public class PlayerMotor : MonoBehaviour
         //neste momento spint esta sendo segurado
         isSprinting = false;
         actualSpeed = speed;
+    }
+
+    private void CrouchAceleration()
+    {
+        crouchTimer += Time.deltaTime;
+        float p = crouchTimer/1;
+        if (isCrouching)
+            controller.height = Mathf.Lerp(controller.height,1,p);
+        else
+            controller.height = Mathf.Lerp(controller.height,2,p);
+
+        if (p>1)
+        {
+            lerpCrouch = false;
+            crouchTimer = 0f;
+        }
     }
 
 }
