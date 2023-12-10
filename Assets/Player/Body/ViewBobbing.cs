@@ -19,12 +19,6 @@ public class ViewBobbing : MonoBehaviour
         //followerInstance = GetComponent<PositionFollow>();
         originalOfsset = followerInstance.offset;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void ProcessViewBobbing(Vector2 input)
     {
         if(input.magnitude >0f)
