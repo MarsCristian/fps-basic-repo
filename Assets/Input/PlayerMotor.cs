@@ -11,15 +11,20 @@ public class PlayerMotor : MonoBehaviour
     //---------------------PLAYER-STATUS---------------------//
     public float speed = 5f;//velocidade padrao do player
     public float jumpHeight = 3f;
+    public float sprintSpeed = 10f;
     //---------------------PLAYER-STATES---------------------//
     private bool isGrouded;//ver se ta no chao
     private bool isCrouching;
+    [SerializeField]
     private bool isSprinting;
     //---------------------CONFIG---------------------//
     public float gravity = 9.8f;
     //---------------------CROUCH---------------------//
     private bool lerpCrouch;
     private float crouchTimer;
+    //---------------------SPRINT---------------------//
+    [SerializeField]
+    private float actualSpeed;
 
 
     // Start is called before the first frame update
@@ -27,6 +32,7 @@ public class PlayerMotor : MonoBehaviour
     {
         //o Player deve ter um character controler pro motor funcionar
         controller = GetComponent<CharacterController>();
+        actualSpeed = speed;
     }
 
     // Update is called once per frame
@@ -61,7 +67,7 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.x = input.x;
         moveDirection.z = input.y;
         //processando a velociudade do boneco
-        controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
+        controller.Move(transform.TransformDirection(moveDirection) * actualSpeed * Time.deltaTime);
         playerVelocity.y += -gravity * Time.deltaTime;
         
         //processar gravidade
@@ -71,6 +77,7 @@ public class PlayerMotor : MonoBehaviour
         }
         controller.Move(playerVelocity * Time.deltaTime);
         //UnityEngine.Debug.Log(playerVelocity.y);
+        //UnityEngine.Debug.Log(actualSpeed);
     }
 
     public void Jump()
@@ -90,11 +97,15 @@ public class PlayerMotor : MonoBehaviour
 
     public void Sprint()
     {
-        isSprinting = !isSprinting;
-        if(isSprinting)
-            speed = 8;
-        else
-            speed = 5;
+        //neste momento spint esta sendo segurado
+        isSprinting = true;
+        actualSpeed = sprintSpeed;
+    }
+    public void Walk()
+    {
+        //neste momento spint esta sendo segurado
+        isSprinting = false;
+        actualSpeed = speed;
     }
 
 }
