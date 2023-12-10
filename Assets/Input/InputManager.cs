@@ -35,6 +35,8 @@ public class InputManager : MonoBehaviour
         //performed, canceled, started
         //jump context callback
         onFoot.Jump.performed += ctx => motor.Jump();
+        onFoot.Crouch.performed += ctx => motor.Crouch();
+        onFoot.Sprint.performed += ctx => motor.Sprint();
 
 
     }

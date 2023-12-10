@@ -5,17 +5,21 @@ using UnityEngine;
 
 public class PlayerMotor : MonoBehaviour
 {
-    //referencia ao controlador
-    private CharacterController controller;
-    //referencia a posicao do movimento do player
-    private Vector3 playerVelocity;
-    //velocidade padrao do player
-    public float speed = 5f;
-    //ver se ta no chao
-    private bool isGrouded;
-    public float gravity = 9.8f;
+    //---------------------REFERENCES---------------------//
+    private CharacterController controller;//referencia ao controlador
+    private Vector3 playerVelocity;//referencia a posicao do movimento do player
+    //---------------------PLAYER-STATUS---------------------//
+    public float speed = 5f;//velocidade padrao do player
     public float jumpHeight = 3f;
-
+    //---------------------PLAYER-STATES---------------------//
+    private bool isGrouded;//ver se ta no chao
+    private bool isCrouching;
+    private bool isSprinting;
+    //---------------------CONFIG---------------------//
+    public float gravity = 9.8f;
+    //---------------------CROUCH---------------------//
+    private bool lerpCrouch;
+    private float crouchTimer;
 
 
     // Start is called before the first frame update
@@ -30,6 +34,23 @@ public class PlayerMotor : MonoBehaviour
     {
         //pegar se ta no chao
         isGrouded = controller.isGrounded;
+
+        //resolver o agaixar
+        if(lerpCrouch)
+        {
+            crouchTimer += Time.deltaTime;
+            float p = crouchTimer/1;
+            if (isCrouching)
+                controller.height = Mathf.Lerp(controller.height,1,p);
+            else
+                controller.height = Mathf.Lerp(controller.height,2,p);
+
+            if (p>1)
+            {
+                lerpCrouch = false;
+                crouchTimer = 0f;
+            }
+        }
     }
 
     public void ProcessMove(Vector2 input)
@@ -49,7 +70,7 @@ public class PlayerMotor : MonoBehaviour
             playerVelocity.y = -2f;
         }
         controller.Move(playerVelocity * Time.deltaTime);
-        UnityEngine.Debug.Log(playerVelocity.y);
+        //UnityEngine.Debug.Log(playerVelocity.y);
     }
 
     public void Jump()
@@ -58,6 +79,18 @@ public class PlayerMotor : MonoBehaviour
         {
             playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * -gravity);
         }
+    }
+    
+    public void Crouch()
+    {
+        isCrouching = !isCrouching;
+        crouchTimer = 0;
+        lerpCrouch = true;
+    }
+
+    public void Sprint()
+    {
+
     }
 
 }
