@@ -7,12 +7,14 @@ public class PlayerMotor : MonoBehaviour
 {
     //referencia ao controlador
     private CharacterController controller;
-
     //referencia a posicao do movimento do player
     private Vector3 playerVelocity;
-
     //velocidade padrao do player
     public float speed = 5f;
+    //ver se ta no chao
+    private bool isGrouded;
+    public float gravity = 9.8f;
+    public float jumpHeight = 3f;
 
 
 
@@ -26,7 +28,8 @@ public class PlayerMotor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        //pegar se ta no chao
+        isGrouded = controller.isGrounded;
     }
 
     public void ProcessMove(Vector2 input)
@@ -38,6 +41,23 @@ public class PlayerMotor : MonoBehaviour
         moveDirection.z = input.y;
         //processando a velociudade do boneco
         controller.Move(transform.TransformDirection(moveDirection) * speed * Time.deltaTime);
-            
+        playerVelocity.y += -gravity * Time.deltaTime;
+        
+        //processar gravidade
+        if(isGrouded && playerVelocity.y < 0) //se o player ta no chao e caindo
+        {
+            playerVelocity.y = -2f;
+        }
+        controller.Move(playerVelocity * Time.deltaTime);
+        UnityEngine.Debug.Log(playerVelocity.y);
     }
+
+    public void Jump()
+    {
+        if(isGrouded)
+        {
+            playerVelocity.y = Mathf.Sqrt(jumpHeight * -3f * -gravity);
+        }
+    }
+
 }

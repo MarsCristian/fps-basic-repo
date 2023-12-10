@@ -30,6 +30,13 @@ public class InputManager : MonoBehaviour
         //pegar os componentes do jogador
         motor = GetComponent<PlayerMotor>();
         look = GetComponent<PlayerLook>();
+
+        //isso mapeia o contexto do input pra funcao q a gente quer chamar
+        //performed, canceled, started
+        //jump context callback
+        onFoot.Jump.performed += ctx => motor.Jump();
+
+
     }
 
     // Update is called once per frame
