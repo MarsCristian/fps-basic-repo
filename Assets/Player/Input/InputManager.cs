@@ -20,8 +20,9 @@ public class InputManager : MonoBehaviour
     //look mouse
     private PlayerLook look;
 
-    public ViewBobbing viewBobbing;
-
+    //public ViewBobbing viewBobbing;
+    public Sway sway;
+    public Bobbing bobbing;
 
     void Awake() 
     {
@@ -48,10 +49,20 @@ public class InputManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //save inputs
+        Vector2 movementInput = onFoot.Movement.ReadValue<Vector2>();
+        Vector2 lookInput = onFoot.Look.ReadValue<Vector2>();
         // chamar o motor do moviemnto do player com o input do input system
-        motor.ProcessMove(onFoot.Movement.ReadValue<Vector2>());
-        look.ProcessLook(onFoot.Look.ReadValue<Vector2>());
-        viewBobbing.ProcessViewBobbing(onFoot.Movement.ReadValue<Vector2>());
+        motor.ProcessMove(movementInput);
+        look.ProcessLook(lookInput);
+        
+        //viewBobbing.ProcessViewBobbing(onFoot.Movement.ReadValue<Vector2>());
+        sway.ProcessSway(lookInput);
+        sway.ProcessSwayRotation(lookInput);
+
+        bobbing.BobOfsset(motor,movementInput);
+        bobbing.BobRotation(movementInput);
+        bobbing.CompositePositionRotation();
 
     }
 
