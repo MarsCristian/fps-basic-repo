@@ -24,12 +24,15 @@ public class PlayerMotor : MonoBehaviour
     //---------------------SPRINT---------------------//
     private float actualSpeed;
 
+    private Transform cam;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //o Player deve ter um character controler pro motor funcionar
         controller = GetComponent<CharacterController>();
+        cam = Camera.main.transform;
         actualSpeed = speed;
     }
 
@@ -46,12 +49,16 @@ public class PlayerMotor : MonoBehaviour
 
     public void ProcessMove(Vector2 input)
     {
+        //transform.eulerAngles = new Vector3(transform.eulerAngles.x,cam.eulerAngles.y,transform.eulerAngles.z);
+
+
         //setar a direcao como 0
         Vector3 moveDirection = Vector3.zero;
         //processando a direcao do input
         moveDirection.x = input.x;
-        moveDirection.z = input.y;
+        moveDirection.z = input.y; 
         //processando a velociudade do boneco
+
         controller.Move(transform.TransformDirection(moveDirection) * actualSpeed * Time.deltaTime);
         playerVelocity.y += -gravity * Time.deltaTime;
         

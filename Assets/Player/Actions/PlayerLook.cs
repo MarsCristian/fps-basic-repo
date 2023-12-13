@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerLook : MonoBehaviour
 {
-    public Cinemachine.CinemachineVirtualCamera cam;
+    public Transform povCamera;
     private float xRotation = 0f;
 
     public float xSensitivity = 30f;
@@ -20,7 +20,7 @@ public class PlayerLook : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -80f, 80f);
 
         //aplicar no transform da camera
-        cam.transform.localRotation = Quaternion.Euler(xRotation,0,0);
+        povCamera.localRotation = Quaternion.Euler(xRotation,0,0);
 
         //rotacao esquerda direita
         transform.Rotate(Vector3.up * (mouseX * Time.deltaTime) * xSensitivity);
