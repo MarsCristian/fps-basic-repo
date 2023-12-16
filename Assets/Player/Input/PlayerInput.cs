@@ -98,6 +98,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""54d12fe5-1513-424f-857e-9d81c13b4bf0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -353,6 +362,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""Inspect"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c34b305-8d91-4553-be68-e0ec0ae907a4"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -369,6 +389,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         m_OnFoot_Shoot = m_OnFoot.FindAction("Shoot", throwIfNotFound: true);
         m_OnFoot_Reload = m_OnFoot.FindAction("Reload", throwIfNotFound: true);
         m_OnFoot_Inspect = m_OnFoot.FindAction("Inspect", throwIfNotFound: true);
+        m_OnFoot_Aim = m_OnFoot.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -438,6 +459,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_OnFoot_Shoot;
     private readonly InputAction m_OnFoot_Reload;
     private readonly InputAction m_OnFoot_Inspect;
+    private readonly InputAction m_OnFoot_Aim;
     public struct OnFootActions
     {
         private @PlayerInput m_Wrapper;
@@ -450,6 +472,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_OnFoot_Shoot;
         public InputAction @Reload => m_Wrapper.m_OnFoot_Reload;
         public InputAction @Inspect => m_Wrapper.m_OnFoot_Inspect;
+        public InputAction @Aim => m_Wrapper.m_OnFoot_Aim;
         public InputActionMap Get() { return m_Wrapper.m_OnFoot; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -483,6 +506,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inspect.started += instance.OnInspect;
             @Inspect.performed += instance.OnInspect;
             @Inspect.canceled += instance.OnInspect;
+            @Aim.started += instance.OnAim;
+            @Aim.performed += instance.OnAim;
+            @Aim.canceled += instance.OnAim;
         }
 
         private void UnregisterCallbacks(IOnFootActions instance)
@@ -511,6 +537,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @Inspect.started -= instance.OnInspect;
             @Inspect.performed -= instance.OnInspect;
             @Inspect.canceled -= instance.OnInspect;
+            @Aim.started -= instance.OnAim;
+            @Aim.performed -= instance.OnAim;
+            @Aim.canceled -= instance.OnAim;
         }
 
         public void RemoveCallbacks(IOnFootActions instance)
@@ -538,5 +567,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
         void OnInspect(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }
