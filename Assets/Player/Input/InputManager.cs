@@ -8,7 +8,7 @@ public class InputManager : MonoBehaviour
 {
     //referencia ao player input
     //player input é uma classe gerada automaticamente pelo imput system
-    private PlayerInput playerInput;
+    public PlayerInput playerInput;
 
     //referencia a movimentacao a pe
     private PlayerInput.OnFootActions onFoot;
@@ -19,7 +19,7 @@ public class InputManager : MonoBehaviour
     private PlayerMotor motor;
     //look mouse
     private PlayerLook look;
-
+    //gun
     //public ViewBobbing viewBobbing;
     public Sway sway;
     public Bobbing bobbing;
@@ -55,7 +55,7 @@ public class InputManager : MonoBehaviour
         // chamar o motor do moviemnto do player com o input do input system
         motor.ProcessMove(movementInput);
         look.ProcessLook(lookInput);
-        
+     
         //viewBobbing.ProcessViewBobbing(onFoot.Movement.ReadValue<Vector2>());
         sway.ProcessSway(lookInput);
         sway.ProcessSwayRotation(lookInput);
