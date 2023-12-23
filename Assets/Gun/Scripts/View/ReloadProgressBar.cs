@@ -17,7 +17,7 @@ public class ReloadProgressBar : MonoBehaviour
     public void UpdateProgressBarText()
     {
         // Atualize a barra de progresso com base no tempo restante de recarga
-        currentProgress += (Time.deltaTime / gun.currentReloadTime);
+        currentProgress += (gun.currentReloadTime);
         currentProgress = Mathf.Clamp01(currentProgress);
         progressBarText.text = $"Reload: {Mathf.Round(currentProgress * 100)}%";
     }

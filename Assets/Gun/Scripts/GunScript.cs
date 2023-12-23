@@ -158,7 +158,7 @@ public class GunScript : MonoBehaviour
 
         // Calcule o tempo de recarga com base no número de pressionamentos
         currentReloadTime = gunStatus.reloadTime / (1 + reloadPressCount * 0.1f);
-        reload.UpdateProgressBarText();
+        //reload.UpdateProgressBarText();
         // Ajuste o valor 0.1f conforme necessário para controlar a redução de tempo
         Invoke("ReloadFinished", currentReloadTime); 
     }
@@ -168,7 +168,7 @@ public class GunScript : MonoBehaviour
         bulletsLeft = gunStatus.magazineSize;
         reloadPressCount = 0;
         currentReloadTime = baseReloadTime;
-        reload.ResetProgress();
+        //reload.ResetProgress();
     }
     // private void CancelReload()
     // {
