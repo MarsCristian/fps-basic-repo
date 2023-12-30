@@ -25,6 +25,7 @@ public class PlayerMotor : MonoBehaviour
     private float actualSpeed;
 
     private Transform cam;
+    public GameObject gun;
 
 
     // Start is called before the first frame update
@@ -92,6 +93,8 @@ public class PlayerMotor : MonoBehaviour
         //neste momento spint esta sendo segurado
         isSprinting = true;
         actualSpeed = sprintSpeed;
+        gun.GetComponent<Animator>().Play("Running");
+
     }
     public void Walk()
     {

@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07a240f05f9751f458f835e6e7ef1769, type: 3}
   m_Name: Gun
   m_EditorClassIdentifier: 
-  timeBetweenShooting: 0.1
+  timeBetweenShooting: 0.05
   spread: 3
-  reloadTime: 2
+  reloadTime: 5
   timeBetweenShots: 0
+  recoil: 0
   magazineSize: 50
   bulletsPerTap: 1
   allowButtonHold: 1

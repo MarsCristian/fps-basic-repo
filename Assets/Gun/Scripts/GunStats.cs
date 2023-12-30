@@ -7,7 +7,7 @@ using UnityEngine;
 public class GunStatus : ScriptableObject
 {
     //Gun stats
-    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots;
+    public float timeBetweenShooting, spread, reloadTime, timeBetweenShots, recoil;
     public int magazineSize=10, bulletsPerTap;
     public bool allowButtonHold;    
 

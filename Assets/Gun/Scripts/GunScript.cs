@@ -38,6 +38,12 @@ public class GunScript : MonoBehaviour
     public float shootInput;
     public float reloadInput;
 
+    //aiming 
+    public bool isAiming = false;
+
+    //recoil
+    public Recoil recoilScript;
+
     private void Start()
     {
         playerInput = playerInputManager.playerInput;
@@ -56,6 +62,9 @@ public class GunScript : MonoBehaviour
         
         //float shootInput = playerInput.OnFoot.Shoot.ReadValue<float>();
         //float reloadInput = playerInput.OnFoot.Reload.ReadValue<float>();
+        if(isAiming)
+            ProcessAiming();
+
 
         shooting = shootInput>0?true:false;
 
@@ -81,19 +90,13 @@ public class GunScript : MonoBehaviour
             ammunitionDisplay.SetText(bulletsLeft / gunStatus.bulletsPerTap + " / " + gunStatus.magazineSize / gunStatus.bulletsPerTap);
     }
 
-
-
-    private void MyInput()
-    {
-        
-    }
-
     private void Shoot()
     {
         readyToShoot = false;
 
         //Find the exact hit position using a raycast
-        Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
+        //Ray ray = fpsCam.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0)); //Just a ray through the middle of your current view
+        Ray ray = new Ray(attackPoint.position,attackPoint.forward);
         RaycastHit hit;
 
         //check if ray hits something
@@ -111,7 +114,12 @@ public class GunScript : MonoBehaviour
         float y = UnityEngine.Random.Range(-gunStatus.spread, gunStatus.spread);
 
         //Calculate new direction with spread
-        Vector3 directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
+        Vector3 directionWithSpread = directionWithoutSpread;
+
+        if(!isAiming)
+        {
+            directionWithSpread = directionWithoutSpread + new Vector3(x, y, 0); //Just add spread to last direction
+        }
 
         //Instantiate bullet/projectile
         GameObject currentBullet = Instantiate(bulletConfig.bullet, attackPoint.position, Quaternion.identity); //store instantiated bullet in currentBullet
@@ -136,6 +144,7 @@ public class GunScript : MonoBehaviour
             allowInvoke = false;
 
             //Add recoil to player (should only be called once)
+            recoilScript.RecoilFire();
             //playerRb.AddForce(-directionWithSpread.normalized * recoilForce, ForceMode.Impulse);
         }
 
@@ -177,7 +186,9 @@ public class GunScript : MonoBehaviour
     //     reloadPressCount = 0;  // Reinicia o contador de pressionamentos para recarga.
     //     currentReloadTime = baseReloadTime;  // Reinicia o tempo de recarga para o valor base.
     // }
-
+    private void ProcessAiming()
+    {
+    }
 
 }
 

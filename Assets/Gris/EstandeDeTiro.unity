@@ -1428,6 +1428,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc90354fdad74c44eb3c1b42c41be668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &425143218 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 878898629970456383, guid: 3438639e0da8dff4fa71f54351cc90be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1691894040}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db9497769df63424c89cc7874d319d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &456579188
 GameObject:
   m_ObjectHideFlags: 0
@@ -1699,6 +1711,8 @@ MonoBehaviour:
   allowInvoke: 1
   shootInput: 0
   reloadInput: 0
+  isAiming: 0
+  recoilScript: {fileID: 1188924969}
 --- !u!95 &519322950
 Animator:
   serializedVersion: 5
@@ -3360,6 +3374,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc90354fdad74c44eb3c1b42c41be668, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1188924967 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3825871201410787773, guid: 3438639e0da8dff4fa71f54351cc90be,
+    type: 3}
+  m_PrefabInstance: {fileID: 1691894040}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1188924969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1188924967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37d7cc7dfe371fb468e57e08b16ff556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recoilX: -2
+  recoilY: 2
+  recoilZ: 0.35
+  recoilXAIM: -1
+  recoilYAIM: 1
+  recoilZAIM: 0.15
+  snapiness: 6
+  returnSpeed: 2
+  gun: {fileID: 519322945}
 --- !u!1 &1225534465
 GameObject:
   m_ObjectHideFlags: 0
@@ -5236,6 +5277,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 920311509291419230, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: antialiasing
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 920311509291419230, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: allowDynamicResolution
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1169231110644269767, guid: 3438639e0da8dff4fa71f54351cc90be,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -5255,6 +5306,11 @@ PrefabInstance:
         type: 3}
       propertyPath: field of view
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1192785760898853402, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: m_AllowDynamicResolution
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6120864035472953253, guid: 3438639e0da8dff4fa71f54351cc90be,
         type: 3}
@@ -5326,6 +5382,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8201113103209751720, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 519322942}
+    - target: {fileID: 8201113103209751720, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201113103209751720, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: jumpHeight
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8201113103209751720, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      propertyPath: sprintSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5588339395609797363, guid: 3438639e0da8dff4fa71f54351cc90be, type: 3}
     m_RemovedGameObjects: []
@@ -5335,6 +5411,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1859691737}
+    - targetCorrespondingSourceObject: {fileID: 3825871201410787773, guid: 3438639e0da8dff4fa71f54351cc90be,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1188924969}
     - targetCorrespondingSourceObject: {fileID: 6351138662047787633, guid: 3438639e0da8dff4fa71f54351cc90be,
         type: 3}
       insertIndex: -1
@@ -5663,6 +5743,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Gun: {fileID: 519322942}
   cam: {fileID: 735129899}
+  gunScript: {fileID: 519322945}
+  bobbing: {fileID: 425143218}
 --- !u!1 &1887519275
 GameObject:
   m_ObjectHideFlags: 0
